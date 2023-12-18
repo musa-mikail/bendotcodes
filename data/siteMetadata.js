@@ -1,9 +1,9 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'ben.codes',
-  author: 'Benoit Tremblay',
-  headerTitle: 'ben.codes',
-  description: 'My thoughts on software development',
+  title: 'Mikail:Thoughts',
+  author: 'Musa Mikail',
+  headerTitle: 'Mikail:Thoughtscodes',
+  description: 'My thoughts on computing, AI and life in general',
   language: 'en-us',
   theme: 'system',
   siteUrl: 'https://ben.codes',
