@@ -1,12 +1,13 @@
 ---
-title: 'Building Applications Using LLMs'
-date: '2023-12-23'
-tags: ['Retrieval Augmented Generation']
+title: 'Your Greatest Mistake of Over-Engineering'
+date: '2023-04-27'
+tags: ['engineering']
 draft: false
-summary: Recent works have shown that the performance of LMMs to generate human-like responses can be significantly improved with fine-tuning of the foundational model using techniques like [Supervised instruction fine-tuning](https://docs.nvidia.com/nemo-framework/user-guide/latest/modelguide/sft.html#:~:text=Supervised%20Fine%2DTuning%20(SFT)%20is%20the%20process%20of%20fine,done%20after%20model%20pre%2Dtraining), [Reinforcement Learning by Human Feedback](https://huggingface.co/blog/rlhf) and [Domain-adaptive or task-adaptive continued pre-training](https://ceur-ws.org/Vol-2723/short33.pdf). Software application developers intending to use LMMs as a core part of their workflow are always advised to exercise caution when integrating LLMs into business-critical applications. While the afore-mentioned techniques can boost the performance of LMMs significantly, yet they do come at a considerable time, computer resources and cost. This calls for a more pragmatic approach to improving the usability of LMMs in business-critical domains like healthcare, Finance and critical national infrastructure.
-LLMs are mostly trained unsupervised on a large corpus of text that is seldom clean. As LLMs are built and trained to conceptualize the meaning and knowledge contained in the source training data, they also imbibe the social and statistical biases inherent to the source dataset. Additionally, because the knowledge learned by the model is limited by the context of the data it was trained with, LMMs are temporally constrained.
-
+summary: I’ve been guilty of over-engineering a lot. Over-engineering is fun, it makes you learn, it makes you grow. It lets you explore things that would not have been possible otherwise. When used with a fun side project or a proof of concept that is not business critical and it turns out bad, no harm no foul. However, when you are working on something that is very important for your company or client, it must be treated very carefully.
 ---
+<![endif]-->
+
+# Building Applications Using LLMs
 
 In this Article I will outline the steps to create a real-world application using propriety and opensource [Large Language Models (LLMs)](https://en.wikipedia.org/wiki/Large_language_model).
 
