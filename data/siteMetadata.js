@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'Mikail:Thoughts',
   author: 'Musa Mikail',
   headerTitle: 'Mikail:Thoughtscodes',
-  description: 'My thoughts on computing, AI and life in general',
+  description: 'My thoughts on recent Developments in AI and life in general',
   language: 'en-us',
   theme: 'system',
   siteUrl: 'https://ben.codes',

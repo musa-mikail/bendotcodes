@@ -1,0 +1,71 @@
+---
+title: 'building applications using LLMs 1'
+date: '2023-12-20'
+tags: ['Machine Learning']
+draft: false
+summary: Recent works have shown that the performance of LMMs to generate human-like responses can be significantly improved with fine-tuning of the foundational model using techniques like Supervised instruction fine-tuning, Reinforcement Learning by Human Feedback and Domain-adaptive or task-adaptive continued pre-training. Software application developers intending to use LMMs as a core part of their workflow are always advised to exercise caution when integrating LLMs into business-critical applications. While the afore-mentioned techniques can boost the performance of LMMs significantly, yet they do come at a considerable time, computer resources and cost. This calls for a more pragmatic approach to improving the usability of LMMs in business-critical domains like healthcare, Finance and critical national infrastructure. LLMs are mostly trained unsupervised on a large corpus of text that is seldom clean.
+---
+
+# Building Applications Using LLMs
+
+In this series we will explore the process of creating a real-world application using propriety and opensource [Large Language Models (LLMs)](https://en.wikipedia.org/wiki/Large_language_model).
+
+Recently, LLMs have gained popularity in the mainstream media, especially with the release of [ChatGPT](https://openai.com/chatgpt) and subsequently [Dall-e](https://openai.com/dall-e-3) by OpenAI. What make these models interesting is their near-human text and image generation capabilities.  However, pretrained Models like GPT-3.5 (the model powering chatGPT) have  limitations that need to be addressed before they can be used in building production-level applications.
+
+## Limitations of LLMs and Mitigation Techniques
+
+Recent works have shown that the performance of LMMs to generate human-like responses can be significantly improved with fine-tuning of the foundational model using techniques like [Supervised instruction fine-tuning](https://docs.nvidia.com/nemo-framework/user-guide/latest/modelguide/sft.html#:~:text=Supervised%20Fine%2DTuning%20(SFT)%20is%20the%20process%20of%20fine,done%20after%20model%20pre%2Dtraining), [Reinforcement Learning by Human Feedback](https://huggingface.co/blog/rlhf) and [Domain-adaptive or task-adaptive continued pre-training](https://ceur-ws.org/Vol-2723/short33.pdf). Software application developers intending to use LMMs as a core part of their workflow are always advised to exercise caution when integrating LLMs into business-critical applications. While the afore-mentioned techniques can boost the performance of LMMs significantly, yet they do come at a cost in form of longer training cycles,  compute resources and energy. Thus there is a need for a more pragmatic technique for improving the usability of LMMs in business-critical domains like healthcare, Finance and critical national infrastructure.
+
+LLMs are mostly trained unsupervised on a large corpus of text that is seldom clean. And because LLMs are built and trained to conceptualize the meaning and knowledge contained in the source training data, they also imbibe the social and statistical biases inherent to the source dataset. Additionally, because the knowledge learned by the model is limited by the context of the data it was trained with, LMMs are temporally constrained.
+
+For example, when ChatGPT (Powered by OpenAI GPT-3.5) was ask the question below on the 23rd December 2023:
+
+>Who is the president of Federal Republic of Nigeria?
+
+ChatGPT generated the response:
+
+>As of my knowledge cutoff in September 2021, the President of Nigeria is Muhammadu Buhari....
+
+While the LLMs had made an attempt to temporally contextualize its response, the response highlighted the time-bound aspects of its knowledge.
+
+Additionally, LLMs do not have the cognitive ability (like humans) to discern the logical nuances often encountered in complex real-life scenarios. For example, consider the prompt given to chatGPT-3.5:
+
+>You are a mathematics student and you were asked the question in an exam: If it takes 3 hours for 2 students to watch a movie on their TV, how many hours will it take 4 students to watch the same movie?
+
+To a human responder, it is clear that considering the scenario, it will take the 4 students the same time to watch the same movie on the same TV. However, the LMM returned the following response:
+
+>To solve this problem, we can use the concept of direct proportionality. If it takes 3 hours for 2 students to watch a movie, we can set up a proportion to find out how long it will take for 4 students to watch the same movie.
+Let's denote the time it takes for 4 students to watch the movie as "x" hours.
+We can set up the proportion as follows:
+2 students / 3 hours = 4 students / x hours
+To solve for x, we can cross-multiply:
+2 * x = 4 * 3
+2x = 12
+Dividing both sides by 2:
+x = 12 / 2
+x = 6
+Therefore, it will take 6 hours for 4 students to watch the same movie.
+
+**I know!!!** you might be thinking, does that make LMMs useless and impossible to utilize in creqating meaningful applications in business and other critical areas? Absolutely **No!!!**.
+
+Let’s revisit the second example above. We can help the LMM to make a better judgement by making our prompt more helpful and precise.
+
+Let’s for a moment change our prompt to the text below and observe how that affect the output of ChatGPT.
+
+>You are a mathematics student and you were asked the question in an exam: If it takes 3 hours for 2 students to watch a movie on their TV, how many hours will it take 4 students to watch the same movie? **Answer the question the way an intelligent human will answer it**.
+
+The bolded addition to the prompt provided some additional context and insight to the LMM indicating that it needs to generate an output based on logical reasoning not just based on some mathematical formula.  Now see the response generated by the LMM:
+
+>If it takes 3 hours for 2 students to watch a movie, we can determine how many hours it will take for 4 students to watch the same movie by considering the ratio of students to viewing time.
+Since the number of students has doubled (from 2 to 4), it is reasonable to assume that the viewing time will remain the same. In other words, if it takes 3 hours for 2 students, it will likely still take 3 hours for 4 students to watch the movie.
+This assumption is based on the fact that the movie length and the rate at which students watch the movie remain constant.
+
+We can see that by crafting a proper prompt, we were able to help the LMM to make a more informed decision in its reasoning and subsequently its response. This science/art of generating well-crafted prompts that help an LMM to provide a focused and more intelligent response is called **Prompt Engineering**.
+
+While Prompt engineering can mitigate against the second problem, it is easy to see the limitation of this approach when the context the LLM need to make a better decision grow in size. Now imagine the LLM need to respond intelligently on private information like internal business reports or standard operating procedures that were not available to the public and therefore were not part of the dataset used in training the model. There is no way the model can correctly generate a correct response except if that information is passed to it in some way. Now it is not valuable to always pass the document in the body of the prompt directly each time a prompt is been passed to the LMM.
+
+To address this problem, an upstream activity can be introduced prior to prompting the LMM where the additional context (the reports, procedures, etc.) can be augmented with the prompt been sent to the LMM's workflow in a pragmatic manner such that the LMM will generate response based on the additional context and the prompt, without the need to finetune the base model. This Technique is called **Retrieval Augmented Generation (RAG)**
+
+![Alt text](/static/images/RAG_schematic.png)
+
+In the [next post](/blog/rag-LLMs-1) I will explain in details the main components of a RAG system and begin to setup our project structure. See you in the next post.
